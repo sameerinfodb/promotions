@@ -1,6 +1,131 @@
 {
   "version": 1,
-  "projects": {},
+  "projects": {
+    "promotion": {
+      "projectType": "application",
+      "schematics": {
+        "@nrwl/angular:component": {
+          "style": "scss"
+        }
+      },
+      "root": "apps/promotion",
+      "sourceRoot": "apps/promotion/src",
+      "prefix": "sample1",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:browser",
+          "options": {
+            "outputPath": "dist/apps/promotion",
+            "index": "apps/promotion/src/index.html",
+            "main": "apps/promotion/src/main.ts",
+            "polyfills": "apps/promotion/src/polyfills.ts",
+            "tsConfig": "apps/promotion/tsconfig.app.json",
+            "aot": true,
+            "assets": [
+              "apps/promotion/src/favicon.ico",
+              "apps/promotion/src/assets"
+            ],
+            "styles": ["apps/promotion/src/styles.scss"],
+            "scripts": []
+          },
+          "configurations": {
+            "production": {
+              "fileReplacements": [
+                {
+                  "replace": "apps/promotion/src/environments/environment.ts",
+                  "with": "apps/promotion/src/environments/environment.prod.ts"
+                }
+              ],
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "extractCss": true,
+              "namedChunks": false,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true,
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "2mb",
+                  "maximumError": "5mb"
+                },
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "6kb",
+                  "maximumError": "10kb"
+                }
+              ]
+            }
+          }
+        },
+        "serve": {
+          "builder": "@angular-devkit/build-angular:dev-server",
+          "options": {
+            "browserTarget": "promotion:build"
+          },
+          "configurations": {
+            "production": {
+              "browserTarget": "promotion:build:production"
+            }
+          }
+        },
+        "extract-i18n": {
+          "builder": "@angular-devkit/build-angular:extract-i18n",
+          "options": {
+            "browserTarget": "promotion:build"
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "apps/promotion/tsconfig.app.json",
+              "apps/promotion/tsconfig.spec.json"
+            ],
+            "exclude": ["**/node_modules/**", "!apps/promotion/**/*"]
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "apps/promotion/src/test.ts",
+            "tsConfig": "apps/promotion/tsconfig.spec.json",
+            "karmaConfig": "apps/promotion/karma.conf.js",
+            "polyfills": "apps/promotion/src/polyfills.ts",
+            "styles": [],
+            "scripts": [],
+            "assets": []
+          }
+        }
+      }
+    },
+    "promotion-e2e": {
+      "root": "apps/promotion-e2e",
+      "projectType": "application",
+      "architect": {
+        "e2e": {
+          "builder": "@angular-devkit/build-angular:protractor",
+          "options": {
+            "protractorConfig": "apps/promotion-e2e/protractor.conf.js",
+            "devServerTarget": "promotion:serve"
+          },
+          "configurations": {
+            "production": {
+              "devServerTarget": "promotion:serve:production"
+            }
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": "apps/promotion-e2e/tsconfig.e2e.json",
+            "exclude": ["**/node_modules/**", "!apps/promotion-e2e/**/*"]
+          }
+        }
+      }
+    }
+  },
   "cli": {
     "defaultCollection": "@nrwl/angular"
   },
@@ -46,5 +171,6 @@
     "@nrwl/angular:library": {
       "unitTestRunner": "karma"
     }
-  }
+  },
+  "defaultProject": "promotion"
 }
