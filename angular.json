@@ -25,7 +25,10 @@
               "apps/promotion/src/favicon.ico",
               "apps/promotion/src/assets"
             ],
-            "styles": ["apps/promotion/src/styles.scss"],
+            "styles": [
+              "./node_modules/@angular/material/prebuilt-themes/indigo-pink.css",
+              "apps/promotion/src/styles.scss"
+            ],
             "scripts": []
           },
           "configurations": {
@@ -83,7 +86,10 @@
               "apps/promotion/tsconfig.app.json",
               "apps/promotion/tsconfig.spec.json"
             ],
-            "exclude": ["**/node_modules/**", "!apps/promotion/**/*"]
+            "exclude": [
+              "**/node_modules/**",
+              "!apps/promotion/**/*"
+            ]
           }
         },
         "test": {
@@ -93,7 +99,9 @@
             "tsConfig": "apps/promotion/tsconfig.spec.json",
             "karmaConfig": "apps/promotion/karma.conf.js",
             "polyfills": "apps/promotion/src/polyfills.ts",
-            "styles": [],
+            "styles": [
+              "./node_modules/@angular/material/prebuilt-themes/indigo-pink.css"
+            ],
             "scripts": [],
             "assets": []
           }
@@ -120,7 +128,10 @@
           "builder": "@angular-devkit/build-angular:tslint",
           "options": {
             "tsConfig": "apps/promotion-e2e/tsconfig.e2e.json",
-            "exclude": ["**/node_modules/**", "!apps/promotion-e2e/**/*"]
+            "exclude": [
+              "**/node_modules/**",
+              "!apps/promotion-e2e/**/*"
+            ]
           }
         }
       }
